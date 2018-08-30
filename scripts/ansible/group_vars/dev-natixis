@@ -5,6 +5,6 @@ site_server_name: ["natixis.cloudaccess.host", "www.natixis.cloudaccess.host"]
 doc_root: "/mnt/data/vhosts/casite-935572.cloudaccess.net/httpdocs"
 deploy_env_domain: "natixis.cloudaccess.host"
 deploy_env: "dev-natixis"
-artifact_filename: "natixis.tar"
+artifact_filename: "demo.tar"
 upstreams:
  - { name: dev-natixis, ip: ["127.0.0.1:81"], config_lines: [] }
