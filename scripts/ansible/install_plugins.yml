@@ -1,3 +1,4 @@
+---
 - name: Install plugins
   include: plugins_and_packages.yml
   with_items:
