@@ -1,21 +1,22 @@
 ---
 - hosts: localhost
   become: false
+  vars_files: ["secrets/ssh_passwords"]
   tasks:
   - name: Install plugin
     set_fact:
-      jenkins_admin_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN"
+      jenkins_admin_password: "{{ jenkins_admin_password }}"
       no_log: True
 
   - name: Install Jenkins plugins using password.
     jenkins_plugin:
       name: "{{ item }}"
       jenkins_home: "/var/lib/jenkins/"
-      url_username: "vaibhavTekdi"
-      url_password: "Tekdi@2018"
+      url_username: "{{ jenkins_username }}"
+      url_password: "{{ jenkins_password }}"
       timeout: "30"
       updates_expiration: "86400"
-      url: "http://localhost:8080"
+      url: "http://{{jenkins_host}}:8080"
       with_dependencies: "yes"
     with_items:
       - "ansible"
