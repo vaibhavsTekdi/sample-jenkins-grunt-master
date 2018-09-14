@@ -8,8 +8,6 @@
     return_content: yes
   register: crumb_token
   until: crumb_token.content.find('Please wait while Jenkins is getting ready') == -1
-  retries: 10
-  delay: 5
   tags: [jenkins]
 
 - name: Plugins are installed
