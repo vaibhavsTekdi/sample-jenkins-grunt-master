@@ -1,4 +1,37 @@
 ---
-- name: Install plugin
+# jenkins_plugin module doesn't support password files.
+- name: Set Jenkins admin password fact.
+  set_fact:
+    jenkins_admin_password: "Tekdi@2018"
+  no_log: True
+
+- name: Download current plugin updates from Jenkins update site
+  get_url:
+    url: http://updates.jenkins-ci.org/update-center.json
+    dest: "/var/lib/jenkins/updates/default.json"
+    owner: jenkins
+    group: jenkins
+    mode: 0440
+
+- name: Remove first and last line from json file
+  replace:
+    path: "/var/lib/jenkins/updates/default.json"
+    regexp: "1d;$d"
+
+- name: Install Jenkins plugins using password.
   jenkins_plugin:
-    name: git
+    name: "{{ item }}"
+    jenkins_home: "/var/lib/jenkins/"
+    url_username: "vaibhavTekdi"
+    url_password: "Tekdi@2018"
+    timeout: "30"
+    updates_expiration: "86400"
+    url: "http://localhost:8080"
+    with_dependencies: "yes"
+  with_items:
+    - "git"
+    - "copyArtifacts"
+    - "github-branch-source"
+    - "github"
+  when: jenkins_admin_password != ""
+  notify: restart jenkins
