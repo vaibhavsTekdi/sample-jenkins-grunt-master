@@ -31,8 +31,6 @@
       url: "http://localhost:8080"
       with_dependencies: "yes"
     with_items:
-      - "git"
-      - "copyArtifacts"
+      - "copyartifact"
       - "github-branch-source"
-      - "github"
     when: jenkins_admin_password != ""
