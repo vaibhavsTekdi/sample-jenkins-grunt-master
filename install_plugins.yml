@@ -4,6 +4,7 @@
     - "git"
     - "copyArtifacts"
     - "ansible"
+    - "github-branch-source"
   loop_control:
     loop_var: plugin_name
   tags: [jenkins]
