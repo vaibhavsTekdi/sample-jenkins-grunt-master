@@ -1,6 +1,4 @@
 ---
-- hosts: all
-  become: false
   tasks:
   - name: Install plugin
     set_fact:
