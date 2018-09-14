@@ -24,7 +24,6 @@
   with_items:
     - "git"
     - "copyArtifacts"
-    - "ansible"
     - "github-branch-source"
     - "github"
   tags: [jenkins]
@@ -34,7 +33,6 @@
   with_items:
     - "git"
     - "copyArtifacts"
-    - "ansible"
     - "github-branch-source"
     - "github"
   tags: [jenkins]
