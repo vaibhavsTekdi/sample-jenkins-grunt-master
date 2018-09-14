@@ -1,4 +1,7 @@
 ---
+- hosts: all
+  become: false
+  tasks:
 # jenkins_plugin module doesn't support password files.
 - name: Set Jenkins admin password fact.
   set_fact:
