@@ -4,7 +4,7 @@
   tasks:
   - name: Install plugin
     set_fact:
-      jenkins_admin_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN/6X54="
+      jenkins_admin_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN"
       no_log: True
 
   - name: Download current plugin updates from Jenkins update site
@@ -25,7 +25,7 @@
       name: "{{ item }}"
       jenkins_home: "/var/lib/jenkins/"
       url_username: "vaibhavTekdi"
-      url_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN/6X54="
+      url_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN"
       timeout: "30"
       updates_expiration: "86400"
       url: "http://localhost:8080"
