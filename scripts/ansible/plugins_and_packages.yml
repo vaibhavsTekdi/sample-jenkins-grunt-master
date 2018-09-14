@@ -1,10 +1,4 @@
 ---
 - name: Install plugin
   jenkins_plugin:
-    name: {{ item }}
-  with_items:
-    - "git"
-    - "copyArtifacts"
-    - "github-branch-source"
-    - "github"
-  tags: [jenkins]
+    name: git
