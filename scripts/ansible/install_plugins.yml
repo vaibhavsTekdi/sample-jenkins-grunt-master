@@ -1,11 +1,12 @@
 ---
 - name: Install plugins
   include: plugins_and_packages.yml
+  vars:
+    my_item_value: plugin_name
   with_items:
     - "git"
     - "copyArtifacts"
     - "ansible"
     - "github-branch-source"
     - "github"
-  register: plugin_name
   tags: [jenkins]
