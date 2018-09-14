@@ -11,27 +11,13 @@
   - name: Install Jenkins plugins using password.
     jenkins_plugin:
       name: "{{ item }}"
-      jenkins_home: "/var/lib/jenkins/"
+      jenkins_home: "{{ jenkins_home }}"
       url_username: "{{ jenkins_username }}"
       url_password: "{{ jenkins_password }}"
       timeout: "30"
       updates_expiration: "86400"
       url: "http://{{jenkins_host}}:8080"
       with_dependencies: "yes"
-    with_items:
-      - "ansible"
-      - "copyartifact"
-      - "github-branch-source"
-      - "nodejs"
-    when: jenkins_admin_password != ""
-
-  - name: Enable the plugin
-    jenkins_plugin:
-      name: "{{ item }}"
-      url_username: "{{ jenkins_username }}"
-      url_password: "{{ jenkins_password }}"
-      url: "http://{{jenkins_host}}:8080"
-      state: enabled
     with_items:
       - "ansible"
       - "copyartifact"
