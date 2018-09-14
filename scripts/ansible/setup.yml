@@ -28,4 +28,10 @@
   - name: Restart Jenkins if required
     service:
       name: jenkins
+      jenkins_home: "{{ jenkins_home }}"
+      url_username: "{{ jenkins_username }}"
+      url_password: "{{ jenkins_password }}"
+      timeout: "30"
+      updates_expiration: "86400"
+      url: "http://{{jenkins_host}}:8080"
       state: restarted
