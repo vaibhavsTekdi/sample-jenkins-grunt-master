@@ -28,7 +28,6 @@
   - name: Enable the plugin
     jenkins_plugin:
       name: "{{ item }}"
-      jenkins_home: "/var/lib/jenkins/"
       url_username: "{{ jenkins_username }}"
       url_password: "{{ jenkins_password }}"
       url: "http://{{jenkins_host}}:8080"
@@ -38,3 +37,4 @@
       - "copyartifact"
       - "github-branch-source"
       - "nodejs"
+    when: jenkins_admin_password != ""
