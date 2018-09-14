@@ -36,4 +36,3 @@
       - "github-branch-source"
       - "github"
     when: jenkins_admin_password != ""
-    notify: restart jenkins
