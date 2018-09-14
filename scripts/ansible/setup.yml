@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: false
+  tasks:
+# jenkins_plugin module doesn't support password files.
+- name: Install Jenkins plugins.
+  jenkins_plugin:
+    name: "{{ item }}"
+    jenkins_home: "/var/lib/jenkins/"
+    timeout: "30"
+    updates_expiration: "86400"
+    url: "http://localhost:8080"
+    with_dependencies: "yes"
+  with_items:
+    - "copyArtifacts"
+    - "github-branch-source"
+  when: jenkins_admin_password != ""
+  notify: restart jenkins
