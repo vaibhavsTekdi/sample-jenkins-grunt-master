@@ -18,10 +18,19 @@
       updates_expiration: "86400"
       url: "http://{{jenkins_host}}:8080"
       with_dependencies: "yes"
-      state: enabled
     with_items:
       - "ansible"
       - "copyartifact"
       - "github-branch-source"
       - "nodejs"
     when: jenkins_admin_password != ""
+
+  - name: Enable the plugin
+    jenkins_plugin:
+      name: "{{ item }}"
+    state: enabled
+    with_items:
+      - "ansible"
+      - "copyartifact"
+      - "github-branch-source"
+      - "nodejs"
