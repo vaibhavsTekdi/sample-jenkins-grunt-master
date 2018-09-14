@@ -26,6 +26,6 @@
     when: jenkins_admin_password != ""
 
   - name: Restart Jenkins if required
-      service:
-        name: jenkins
-        state: restarted
+    service:
+      name: jenkins
+      state: restarted
