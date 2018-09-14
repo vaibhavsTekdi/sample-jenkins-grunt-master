@@ -1,6 +1,6 @@
 ---
 - hosts: 127.0.0.1
-  become: false
+  become: true
   tasks:
   - name: Install plugin
     set_fact:
