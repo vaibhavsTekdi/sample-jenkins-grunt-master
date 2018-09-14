@@ -14,5 +14,4 @@
   with_items:
     - "copyArtifacts"
     - "github-branch-source"
-  when: jenkins_admin_password != ""
   notify: restart jenkins
