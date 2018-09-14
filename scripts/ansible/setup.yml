@@ -2,18 +2,6 @@
 - hosts: localhost
   become: false
   tasks:
-  - name: Wait for Jenkins to start up
-    uri:
-      url: http://localhost:8080
-      status_code: 200
-      timeout: 5
-    register: jenkins_service_status
-    retries: 60
-    delay: 5
-    until: >
-     'status' in jenkins_service_status and
-     jenkins_service_status['status'] == 200
-
   - name: Install plugin
     set_fact:
       jenkins_admin_password: "AQAAABAAAAAQWdNNuRiVEfnv53EUQHzhhHkG1Fmmpfv2a6YCyN"
