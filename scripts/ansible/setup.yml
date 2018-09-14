@@ -28,7 +28,7 @@
   - name: Enable the plugin
     jenkins_plugin:
       name: "{{ item }}"
-    state: enabled
+      state: enabled
     with_items:
       - "ansible"
       - "copyartifact"
