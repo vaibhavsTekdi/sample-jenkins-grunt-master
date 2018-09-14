@@ -7,6 +7,5 @@
     - "ansible"
     - "github-branch-source"
     - "github"
-  loop_control:
-    loop_var: plugin_name
+  register: plugin_name
   tags: [jenkins]
