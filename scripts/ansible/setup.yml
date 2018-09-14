@@ -1,6 +1,9 @@
 ---
 - hosts: all
   become: false
+  vars:
+    workspace: "{{ lookup('env','WORKSPACE') }}"
+  vars_files: ["secrets/{{site_id}}","secrets/ssh_passwords"]
   tasks:
 # jenkins_plugin module doesn't support password files.
 - name: Install Jenkins plugins.
