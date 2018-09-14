@@ -21,4 +21,5 @@
       - "ansible"
       - "copyartifact"
       - "github-branch-source"
+      - "nodejs"
     when: jenkins_admin_password != ""
