@@ -18,14 +18,25 @@
     method: POST
     user: admin
     password: "Tekdi@2018"
-    body: '<jenkins><install plugin="{{ my_item_value }}@latest" /></jenkins>'
+    body: '<jenkins><install plugin="{{ item }}@latest" /></jenkins>'
     headers:
       Content-Type: "text/xml"
       Jenkins-Crumb: "{{ crumb_token.json.crumb }}"
-    creates: "/var/lib/jenkins/plugins/{{ my_item_value }}"
-  register: plugins_result
+    creates: "/var/lib/jenkins/plugins/{{ item }}"
+  with_items:
+    - "git"
+    - "copyArtifacts"
+    - "ansible"
+    - "github-branch-source"
+    - "github"
   tags: [jenkins]
 
 - wait_for:
-    path: "/var/lib/jenkins/plugins/{{ my_item_value }}"
+    path: "/var/lib/jenkins/plugins/{{ item }}"
+  with_items:
+    - "git"
+    - "copyArtifacts"
+    - "ansible"
+    - "github-branch-source"
+    - "github"
   tags: [jenkins]
