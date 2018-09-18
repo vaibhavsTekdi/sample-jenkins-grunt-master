@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   become: true
-  become_user: ttpl056
+  become_user: ttpl56
   gather_facts: true
   tasks:
   - name: Install npm
