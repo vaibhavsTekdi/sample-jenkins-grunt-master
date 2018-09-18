@@ -1,9 +1,8 @@
 ---
 - hosts: all
+  connection: local
   become: true
   gather_facts: true
-  vars:
-    ansible_become_pass: "pw4ttpl056"
   tasks:
   - name: Install npm
     apt: name=npm
