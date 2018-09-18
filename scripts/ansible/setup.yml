@@ -26,15 +26,32 @@
       - "nodejs"
     when: jenkins_admin_password != ""
 
-  - name: Node.js | Add the node.js PPA
-    apt_repository: repo=ppa:chris-lea/node.js
-    tags: nodejs
+  - name: Create npm global directory
+    file:
+      path: "/usr/local/lib/npm"
+      owner: "root"
+      group: "root"
+      state: directory
 
-  - name: Node.js | Install nodejs and npm
-    apt: pkg=nodejs update_cache=yes
-    tags: nodejs
+  - name: Add npm_config_prefix bin directory to global $PATH.
+    template:
+      src: npm.sh.j2
+      dest: /etc/profile.d/npm.sh
+      mode: 0644
 
-  - name: Node.js | Install packages
-    command: npm install -g $item
+  - name: Ensure npm global packages are installed.
+    npm:
+      name: "{{ item.name | default(item) }}"
+      version: "{{ item.version | default('latest') }}"
+      global: yes
+      state: latest
+    environment:
+      NPM_CONFIG_PREFIX: "/usr/local/lib/npm"
+      NODE_PATH: "/usr/local/lib/npm/lib/node_modules"
+      NPM_CONFIG_UNSAFE_PERM: "false"
     with_items:
-      - grunt-cli
+      - "grunt-cli"
+
+  - name: Install packages defined in a given package.json.
+    npm:
+      path: ""
