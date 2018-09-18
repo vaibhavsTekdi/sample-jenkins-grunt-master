@@ -1,28 +1,27 @@
 ---
 - hosts: localhost
   become: false
+  vars:
+    my_jenkins_plugins:
+      token-macro:
+        enabled: yes
+      ansible:
+        enabled: yes
+      copyartifact:
+        enabled: yes
+      github:
+        enabled: yes
+      github-branch-source:
+        enabled: yes
+      nodejs:
+        enabled: yes
   vars_files: ["secrets/ssh_passwords"]
   tasks:
-  - name: Install plugin
-    set_fact:
-      jenkins_admin_password: "{{ jenkins_admin_password }}"
-      no_log: True
-
-  - name: Install Jenkins plugins using password.
-    jenkins_plugin:
-      name: "{{ item }}"
-      state: enabled
-      jenkins_home: "{{ jenkins_home }}"
-      url_username: "{{ jenkins_username }}"
-      url_password: "{{ jenkins_password }}"
-      timeout: "30"
-      updates_expiration: "86400"
-      url: "http://{{jenkins_host}}:8080"
-      with_dependencies: "yes"
-    with_items:
-      - "ansible"
-      - "copyartifact"
-      - "github"
-      - "github-branch-source"
-      - "nodejs"
-    when: jenkins_admin_password != ""
+    - name: Install plugins
+      set_fact:
+        jenkins_admin_password: "{{ jenkins_admin_password }}"
+        no_log: True
+      jenkins_plugin:
+        name: "{{ item.key }}"
+      with_dict: "{{ my_jenkins_plugins }}"
+      when: jenkins_admin_password != ""
