@@ -1,8 +1,11 @@
 ---
 - hosts: localhost
   become: true
-  gather_facts: true
+  gather_facts: false
+  connection: local
   tasks:
-  - name: Install npm
-    apt: name=npm
-    tags: devtools
+  - name: install Node.js with specific version
+    apt: name="nodejs"  update_cache=yes  state=present force=yes
+
+  - name: Ensure grunt-cli is installed
+    npm: name=grunt-cli global=yes state=present
