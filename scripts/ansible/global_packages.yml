@@ -1,8 +1,12 @@
 ---
 - hosts: localhost
   tasks:
-  - name: check user
-    remote_user: ashwin
-    sudo: true
-    sudo_user: ttpl56
-    shell: whoami
+  - name: Create npm global directory
+    file:
+      path: "/usr/local/lib/npm"
+      owner: "root"
+      group: "root"
+      state: directory
+    become: yes
+    become_user: ttpl56
+
