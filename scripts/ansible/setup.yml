@@ -18,10 +18,6 @@
   vars_files: ["secrets/ssh_passwords"]
   tasks:
     - name: Install plugins
-      set_fact:
-        jenkins_admin_password: "{{ jenkins_admin_password }}"
-        no_log: True
       jenkins_plugin:
         name: "{{ item.key }}"
       with_dict: "{{ my_jenkins_plugins }}"
-      when: jenkins_admin_password != ""
