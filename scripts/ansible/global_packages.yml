@@ -1,12 +1,10 @@
 ---
-- hosts: localhost
+- hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    ansible_become_pass: "pw4ttpl056"
   tasks:
-  - name: Create npm global directory
-    file:
-      path: "/usr/local/lib/npm"
-      owner: "root"
-      group: "root"
-      state: directory
-    become: yes
-    become_user: ttpl56
-
+  - name: Install npm
+    apt: name=npm
+    tags: devtools
