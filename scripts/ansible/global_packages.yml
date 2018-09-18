@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: true
+  become_method: sudo
   tasks:
   - name: Create npm global directory
     file:
@@ -8,6 +9,8 @@
       owner: "root"
       group: "root"
       state: directory
+    become: true
+    become_method: sudo
 
   - name: Add npm_config_prefix bin directory to global $PATH.
     template:
