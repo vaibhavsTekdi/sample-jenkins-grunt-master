@@ -4,7 +4,7 @@
   become_user: ttpl56
   become_method: sudo
   vars:
-    ansible_become_pass: password
+    ansible_become_pass: pw4ttpl056
   tasks:
   - name: Create npm global directory
     file:
