@@ -24,3 +24,14 @@
       - "github-branch-source"
       - "nodejs"
     when: jenkins_admin_password != ""
+
+  - name: Enable the newly installed Jenkins plugins
+    jenkins_plugin:
+      name: "{{ item }}"
+      new_only: "yes"
+      state: state
+    with_items:
+      - "ansible"
+      - "copyartifact"
+      - "github-branch-source"
+      - "nodejs"
