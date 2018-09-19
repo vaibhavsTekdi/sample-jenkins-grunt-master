@@ -1,11 +1,18 @@
 ---
-- hosts: localhost
-  become: true
-  gather_facts: false
+- name: run the playbook tasks on the localhost
+  hosts: 127.0.0.1
   connection: local
+  become: yes
   tasks:
-  - name: install Node.js with specific version
-    apt: name="nodejs"  update_cache=yes  state=present force=yes
+   - shell: echo "hello world"
 
-  - name: Ensure grunt-cli is installed
-    npm: name=grunt-cli global=yes state=present
+   - name: add apt key for nodesource
+     apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+   - name: add repo for nodesource
+     apt_repository:
+       repo: 'deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main'
+       update_cache: yes
+
+   - name: install nodejs
+     apt: name=nodejs
