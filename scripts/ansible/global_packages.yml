@@ -1,6 +1,7 @@
 ---
 - name: run the playbook tasks on the localhost
   hosts: 127.0.0.1
+  remote_user: root
   connection: local
   become: yes
   become_method: sudo
