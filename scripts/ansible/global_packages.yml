@@ -1,11 +1,11 @@
 ---
 - name: run the playbook tasks on the localhost
   hosts: 127.0.0.1
-  remote_user: root
   connection: local
   become: yes
   become_method: sudo
   become_user: ttpl56
+  become_ask_pass: no
   tasks:
    - shell: echo "hello world"
 
