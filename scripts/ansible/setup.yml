@@ -1,8 +1,16 @@
 ---
 - hosts: localhost
-  become: false
+  gather_facts: no
   vars_files: ["secrets/ssh_passwords"]
   tasks:
+  - name: install Node.js with specific version
+    apt: name="nodejs" update_cache=yes state=present force=yes
+    become: yes
+
+  - name: Install grunt-cli
+    npm: name=grunt-cli global=yes
+    become: yes
+
   - name: Install plugin
     set_fact:
       jenkins_admin_password: "{{ jenkins_admin_password }}"
@@ -25,18 +33,4 @@
       - "github-branch-source"
       - "nodejs"
     when: jenkins_admin_password != ""
-
-  - name: Restart Jenkins
-    service:
-      name: jenkins
-      state: restarted
-
-  - name: Enable installed Jenkins plugins
-    jenkins_plugin:
-      name: ansible
-      state: enabled
-
-  - name: Restart Jenkins
-      service:
-        name: jenkins
-        state: restarted
+    become: false
