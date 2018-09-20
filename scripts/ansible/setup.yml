@@ -26,19 +26,17 @@
       - "nodejs"
     when: jenkins_admin_password != ""
 
+  - name: Restart Jenkins
+      service:
+        name: jenkins
+        state: restarted
+
   - name: Enable installed Jenkins plugins
     jenkins_plugin:
-      name: "{{ item }}"
-      jenkins_home: "{{ jenkins_home }}"
-      url_username: "{{ jenkins_username }}"
-      url_password: "{{ jenkins_password }}"
-      timeout: "30"
-      updates_expiration: "86400"
-      url: "http://{{jenkins_host}}:8080"
+      name: ansible
       state: enabled
-    with_items:
-      - "ansible"
-      - "copyartifact"
-      - "github"
-      - "github-branch-source"
-      - "nodejs"
+
+  - name: Restart Jenkins
+      service:
+        name: jenkins
+        state: restarted
