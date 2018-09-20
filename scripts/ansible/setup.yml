@@ -35,6 +35,7 @@
       timeout: "30"
       updates_expiration: "86400"
       url: "http://{{jenkins_host}}:8080"
+      state: enabled
     with_items:
       - "ansible"
       - "copyartifact"
