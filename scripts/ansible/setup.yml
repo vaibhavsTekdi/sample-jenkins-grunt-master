@@ -16,9 +16,10 @@
       url_password: "{{ jenkins_password }}"
       timeout: "30"
       updates_expiration: "86400"
-      url: "http://{{jenkins_host}}:8080"
       use_proxy: false
       state: enabled
+    environment:
+      no_proxy: "localhost"
     with_items:
       - "ansible"
       - "copyartifact"
