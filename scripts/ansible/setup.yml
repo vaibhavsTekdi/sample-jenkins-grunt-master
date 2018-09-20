@@ -11,13 +11,13 @@
   - name: Install Jenkins plugins using password.
     jenkins_plugin:
       name: "{{ item }}"
-      jenkins_home: "{{ jenkins_home }}"
-      url_username: "{{ jenkins_username }}"
-      url_password: "{{ jenkins_password }}"
-      timeout: "30"
-      updates_expiration: "86400"
-      use_proxy: false
-      state: enabled
+      params:
+        url_username: "{{ jenkins_username }}"
+        jenkins_home: "{{ jenkins_home }}"
+        url_password: "{{ jenkins_password }}"
+        state: enabled
+        url: "http://localhost:8080"
+        use_proxy: false
     environment:
       no_proxy: "localhost"
     with_items:
