@@ -27,9 +27,9 @@
     when: jenkins_admin_password != ""
 
   - name: Restart Jenkins
-      service:
-        name: jenkins
-        state: restarted
+    service:
+      name: jenkins
+      state: restarted
 
   - name: Enable installed Jenkins plugins
     jenkins_plugin:
