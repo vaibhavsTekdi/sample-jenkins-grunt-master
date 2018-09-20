@@ -17,6 +17,7 @@
       timeout: "30"
       updates_expiration: "86400"
       url: "http://{{jenkins_host}}:8080"
+      use_proxy: false
       state: enabled
     with_items:
       - "ansible"
