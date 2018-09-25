@@ -1,12 +1,29 @@
 ---
-- name: Install plugins
-  include: plugins_and_packages.yml
-  vars:
-    my_item_value: plugin_name
-  with_items:
-    - "git"
-    - "copyArtifacts"
-    - "ansible"
-    - "github-branch-source"
-    - "github"
-  tags: [jenkins]
+- hosts: 127.0.0.1
+  connection: local
+  vars_files: ["secrets/ssh_passwords"]
+  become: false
+  tasks:
+  - name: Install plugin
+    set_fact:
+      jenkins_admin_password: "{{ jenkins_admin_password }}"
+      no_log: True
+
+  - name: Install Jenkins plugins using password.
+    jenkins_plugin:
+      name: "{{ item }}"
+      jenkins_home: "{{ jenkins_home }}"
+      url_username: "{{ jenkins_username }}"
+      url_password: "{{ jenkins_password }}"
+      timeout: "30"
+      updates_expiration: "86400"
+      url: "http://{{jenkins_host}}:8080"
+      with_dependencies: "yes"
+    with_items:
+      - "ansible"
+      - "copyartifact"
+      - "github"
+      - "github-branch-source"
+      - "nodejs"
+    when: jenkins_admin_password != ""
+
